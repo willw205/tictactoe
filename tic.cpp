@@ -3,7 +3,7 @@
   Date: 10-13-022
   Project: A two player tictactoe game against humans
   not against an AI. This game will detect if either X Wins
-  or O Wins. And will also detect ties within the game.
+  or O Wins. And this project will also detect ties within the game.
 
 */
 
@@ -12,11 +12,11 @@
 #include <cstring>
 using namespace std;
 
-//Below we are initializing the variables
+//Declaration of our functions below 
 
 void printBoard(char board[3][3]);
 void clearBoard(char board[3][3]);
-void rebootGame(char board[3][3], bool&  tictacAddict);
+void rebootGame(char board[3][3], bool&  tictacAddict); //& sign used to give adress
 bool checkWin(char board[3][3], int player);
 bool checkTie(char board[3][3], int player);
 
@@ -33,7 +33,7 @@ int main() {
   int ties = 0;
   bool tictacAddict = true;
   char board[3][3];
-  char str[3];
+  char input[3];
 
   clearBoard(board);
   
@@ -44,7 +44,7 @@ int main() {
     turn = X_TURN;
 
    while (checkWin(board, X_MOVE) == false && checkWin(board, O_MOVE) == false &&
-	   checkTie(board, X_MOVE) == false && checkTie(board, O_MOVE) == false) {
+	  checkTie(board, X_MOVE) == false && checkTie(board, O_MOVE) == false) {
       if (turn == X_TURN) {
 	cout << "It's X's Move!" << endl;
       }
@@ -54,26 +54,26 @@ int main() {
       
       printBoard(board);
 
-      cin.get(str,3);
+      cin.get(input,3);
       cin.get();
 
       // Checks if user input is a valid input 
 
-        if (strlen(str) != 2) {
+        if (strlen(input) != 2) {
 	cout << "Not Valid! Enter Again." << endl;
       }
-      else if (str[0] != 'a' && str[0] != 'b' && str[0] != 'c') {
+      else if (input[0] != 'a' && input[0] != 'b' && input[0] != 'c') {
 	cout << "Not Valid! Enter Again." << endl;
       }
-      else if (str[1] != '1' && str[1] != '2' && str[1] != '3') {
+      else if (input[1] != '1' && input[1] != '2' && input[1] != '3') {
 	cout << "Not Valid! Enter Again." << endl;
       }
 	
       // If the input is valid it is inserted into the board
 	
       else {
-	int column = str[0] - 'a';
-	int row = str[1] - '1';
+	int column = input[0] - 'a'; // Helps to convert a,b,or c into num from char
+	int row = input[1] - '1'; // Helps convert 1,2,3 into num from char 
 	if (board[row][column] == ' ') {
 	  if (turn == X_TURN) { 
 	    board[row][column] = X_MOVE;
@@ -96,7 +96,7 @@ int main() {
    if (checkWin(board, X_MOVE) == true) {
       x_Wins++;
       cout << " " << endl;
-      cout << "X Has Won!" << endl;
+      cout << "X has Won!" << endl;
       cout << "X Wins: " << x_Wins << endl;
       cout << "O Wins: " << o_Wins << endl;
       cout << "Ties: " << ties << endl; 
@@ -145,6 +145,8 @@ int main() {
   }
 }
 
+// Printing the board 
+
 void printBoard(char board[3][3]) {
 
   cout << " " << endl;
@@ -158,6 +160,8 @@ void printBoard(char board[3][3]) {
   cout << "\t\t  c " << board[0][2] << ' ' << board[1][2] << ' ' << board[2][2] << endl;    
   
 }
+
+// Clearing the board 
 
 void clearBoard(char board[3][3]) {
 
@@ -227,8 +231,9 @@ void rebootGame(char board[3][3], bool& tictacAddict) {
   if(playAgain == 'y') {
     clearBoard(board);
   } else {
-    cout << "Thank you for tic tacking on! See you around! And download Bettervue!" << endl;
+    cout << "Thank you for tic tacking on! See you around!" << endl;
     tictacAddict = false;
   }
 
 }
+
